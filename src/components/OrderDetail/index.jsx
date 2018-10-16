@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const OrderDetail = ({ price, name, sugar, ice, quantity, total, onDelete, id }) => (
+const OrderDetail = ({
+  price,
+  name,
+  sugar,
+  ice,
+  quantity,
+  total,
+  onDelete,
+  id,
+}) => (
   <Main>
     <div>
       <Title>{name}</Title>
@@ -11,7 +20,6 @@ const OrderDetail = ({ price, name, sugar, ice, quantity, total, onDelete, id })
       <h6>x</h6>
       <h6>{quantity}</h6>
       <h6>${total}</h6>
-      <h6>${id}</h6>
     </Container>
     <button onClick={() => onDelete(id)}>delete</button>
   </Main>

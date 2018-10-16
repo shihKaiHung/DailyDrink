@@ -2,6 +2,7 @@ import React from 'react';
 import { compose, withState, withHandlers } from 'recompose';
 import styled from 'styled-components';
 import OrderDetail from './components/OrderDetail';
+import { withModal } from './core/withModal';
 
 const MainComponent = ({
   setName,
@@ -12,9 +13,11 @@ const MainComponent = ({
   onSubmit,
   order,
   onDelete,
+  ModalComponent,
 }) => {
   return (
     <Main>
+      {ModalComponent}
       <OrderBox>
         <OrderItem>
           <input type="text" onChange={e => setName(e.target.value)} />
@@ -63,6 +66,7 @@ const MainComponent = ({
 };
 
 const App = compose(
+  withModal(),
   withState('order', 'setOrder', []),
   withState('name', 'setName', ''),
   withState('ice', 'setIce', 'regularIce'),
@@ -78,14 +82,20 @@ const App = compose(
       quantity,
       order,
       setOrder,
+      setMessage,
+      openModal,
     }) => () => {
-      let orderList = order;
+      if (price == 0 || name == '' || quantity == 0) {
+        openModal();
+        return;
+      }
+      const orderList = order;
       const addOrder = {
-        name: name,
-        ice: ice,
-        sugar: sugar,
-        price: price,
-        quantity: quantity,
+        name,
+        ice,
+        sugar,
+        price,
+        quantity,
         total: price * quantity,
       };
       orderList.push(addOrder);
@@ -104,8 +114,7 @@ const App = compose(
       if (order.length === 1) {
         setOrder([]);
       }
-      const orderList = order
-        .filter(i => i.id !== id);
+      const orderList = order.filter(item => item.id !== id);
       setOrder(orderList);
     },
   })
