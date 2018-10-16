@@ -11,6 +11,7 @@ const MainComponent = ({
   setQuantity,
   onSubmit,
   order,
+  onDelete,
 }) => {
   return (
     <Main>
@@ -46,12 +47,14 @@ const MainComponent = ({
           order.map((item, index) => (
             <OrderDetail
               key={index}
+              id={item.id}
               name={item.name}
               ice={item.ice}
               price={item.price}
               quantity={item.quantity}
               sugar={item.sugar}
               total={item.total}
+              onDelete={onDelete}
             />
           ))}
       </OrderBox>
@@ -76,7 +79,7 @@ const App = compose(
       order,
       setOrder,
     }) => () => {
-      const orderList = order;
+      let orderList = order;
       const addOrder = {
         name: name,
         ice: ice,
@@ -86,6 +89,23 @@ const App = compose(
         total: price * quantity,
       };
       orderList.push(addOrder);
+      const allOrderList = orderList.map((item, index) => ({
+        id: index,
+        name: item.name,
+        ice: item.ice,
+        sugar: item.sugar,
+        price: item.price,
+        quantity: item.quantity,
+        total: item.price * item.quantity,
+      }));
+      setOrder(allOrderList);
+    },
+    onDelete: ({ order, setOrder }) => id => {
+      if (order.length === 1) {
+        setOrder([]);
+      }
+      const orderList = order
+        .filter(i => i.id !== id);
       setOrder(orderList);
     },
   })
