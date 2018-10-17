@@ -7,33 +7,37 @@ const OrderDetail = ({
   sugar,
   ice,
   quantity,
+  text,
   total,
   onDelete,
   id,
 }) => (
   <Main>
     <Wrap>
-      <div>
-        <Title>{name}</Title>
-        <SubTitle>{`${sugar}/${ice}/$${price}`}</SubTitle>
-      </div>
-      <Container>
-        <h6>x</h6>
-        <h6>{quantity}</h6>
-        <h6>${total}</h6>
-        <i
-          style={{}}
-          onClick={() => onDelete(id)}
-          className="fa fa-edit fa-1x"
-          aria-hidden="true"
-        />
-        <i
-          style={{}}
-          onClick={() => onDelete(id)}
-          className="fa fa-trash fa-1x"
-          aria-hidden="true"
-        />
-      </Container>
+      <FlexBox>
+        <div>
+          <Title>{name}</Title>
+          <SubTitle>{`${sugar}/${ice}/$${price}`}</SubTitle>
+        </div>
+        <Container>
+          <h6>x</h6>
+          <h6>{quantity}</h6>
+          <h6>${total}</h6>
+          <i
+            style={{}}
+            onClick={() => onDelete(id)}
+            className="fa fa-edit fa-1x"
+            aria-hidden="true"
+          />
+          <i
+            style={{}}
+            onClick={() => onDelete(id)}
+            className="fa fa-trash fa-1x"
+            aria-hidden="true"
+          />
+        </Container>
+      </FlexBox>
+      <Text>備註： {text}</Text>
     </Wrap>
   </Main>
 );
@@ -49,6 +53,14 @@ const Main = styled.div`
 const Wrap = styled.div`
   width: 100%;
   border-bottom: 1px solid #d7d4d0;
+`;
+
+const Text = styled.p`
+  font-size: 12px;
+  margin: 0;
+`;
+
+const FlexBox = styled.div`
   display: flex;
 `;
 

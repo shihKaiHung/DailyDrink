@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
+import { option } from '../../core/option';
+import { OrderInput } from '../OrderComponent/orderInput';
+import { OrderSelect } from '../OrderComponent/orderSelect';
 import OrderDetail from '../OrderDetail';
 
 const MainComponent = ({
@@ -8,6 +11,7 @@ const MainComponent = ({
   setSugar,
   setPrice,
   setQuantity,
+  setText,
   onSubmit,
   order,
   onDelete,
@@ -19,53 +23,14 @@ const MainComponent = ({
       <OrderBox>
         <OrderContainer>
           <Title>新增訂單</Title>
-          <OrderItem>
-            <OrderItemTitle>品項</OrderItemTitle>
-            <OrderItemInput
-              type="text"
-              onChange={e => setName(e.target.value)}
-            />
-          </OrderItem>
-          <OrderItem>
-            <OrderItemTitle>價錢</OrderItemTitle>
-            <OrderItemInput
-              type="number"
-              onChange={e => setPrice(e.target.value)}
-            />
-          </OrderItem>
-          <OrderItem>
-            <OrderItemTitle>數量</OrderItemTitle>
-            <OrderItemInput
-              min="0"
-              type="number"
-              onChange={e => setQuantity(e.target.value)}
-            />
-          </OrderItem>
-          <OrderItem>
-            <OrderItemTitle>冰塊</OrderItemTitle>
-            <SelectBox>
-              <Select onChange={e => setIce(e.target.value)}>
-                <option value="正常">正常</option>
-                <option value="少冰<">少冰</option>
-                <option value="去冰">去冰</option>
-                <option value="溫">溫</option>
-              </Select>
-            </SelectBox>
-          </OrderItem>
-          <OrderItem>
-            <OrderItemTitle>甜度</OrderItemTitle>
-            <SelectBox>
-              <Select onChange={e => setSugar(e.target.value)}>
-                <option value="正常">正常</option>
-                <option value="少糖">少糖</option>
-                <option value="微糖">微糖</option>
-                <option value="無糖">無糖</option>
-              </Select>
-            </SelectBox>
-          </OrderItem>
+          <OrderInput title="品項" type="text" onChange={setName} />
+          <OrderInput title="價錢" type="number" onChange={setPrice} />
+          <OrderInput title="數量" type="number" onChange={setQuantity} />
+          <OrderSelect title="冰塊" onChange={setIce} option={option.ice} />
+          <OrderSelect title="甜度" onChange={setSugar} option={option.sugar} />
           <OrderItem>
             <OrderItemTitle>備註</OrderItemTitle>
-            <textarea name="" id="" cols="30" rows="2" />
+            <textarea onChange={(e) => setText(e.target.value)} name="" id="" cols="30" rows="2" />
           </OrderItem>
           <OrderItem>
             <Button onClick={onSubmit}>新增</Button>
@@ -81,6 +46,7 @@ const MainComponent = ({
               name={item.name}
               ice={item.ice}
               price={item.price}
+              text={item.text}
               quantity={item.quantity}
               sugar={item.sugar}
               total={item.total}
@@ -116,11 +82,6 @@ const OrderBox = styled.div`
   overflow: auto;
 `;
 
-const Filldiv = styled.div`
-  width: 50px;
-  height: 100%;
-`;
-
 const OrderContainer = styled.div`
   width: 60%;
   height: 60px;
@@ -141,20 +102,6 @@ const OrderItemTitle = styled.p`
   color: #a37264;
 `;
 
-const OrderItemInput = styled.input`
-  width: 100%;
-  height: 15px;
-  font-size: 16px;
-  border: none;
-  transition: 0.5s;
-  border-bottom: 1px solid #d7d4d0;
-  &:focus {
-    outline: none;
-    font-size: 18px;
-    height: 25px;
-  }
-`;
-
 const Button = styled.button`
   margin-top: 20px;
   cursor: pointer;
@@ -170,44 +117,4 @@ const Button = styled.button`
     background-color: #3b8ec2;
     color: #fff;
   }
-`;
-
-const SelectBox = styled.div`
-  margin-top: 5px;
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 20px;
-  line-height: 0;
-  background: #3b8ec2;
-  overflow: hidden;
-  &:after {
-    content: '\\25BC';
-    color: #fff;
-    position: absolute;
-    top: 9px;
-    right: 10px;
-    bottom: 0;
-    background: #3b8ec2;
-    pointer-events: none;
-    transition: 0.25s all ease;
-  }
-`;
-
-const Select = styled.select`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -webkit-font-smoothing: antialiased;
-  -ms-appearance: none;
-  appearance: none;
-  outline: 0;
-  box-shadow: none;
-  border: 0 !important;
-  background: #3b8ec2 none;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0 0 0 0.5em;
-  color: #fff;
-  cursor: pointer;
 `;

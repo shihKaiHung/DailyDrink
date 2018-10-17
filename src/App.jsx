@@ -9,6 +9,7 @@ const App = compose(
   withState('ice', 'setIce', '正常'),
   withState('sugar', 'setSugar', '正常'),
   withState('price', 'setPrice', 0),
+  withState('text', 'setText', ''),
   withState('quantity', 'setQuantity', 0),
   withHandlers({
     onSubmit: ({
@@ -18,6 +19,7 @@ const App = compose(
       price,
       quantity,
       order,
+      text,
       setOrder,
       setMessage,
       openModal,
@@ -33,6 +35,7 @@ const App = compose(
         sugar,
         price,
         quantity,
+        text,
         total: price * quantity,
       };
       orderList.push(addOrder);
@@ -43,6 +46,7 @@ const App = compose(
         sugar: item.sugar,
         price: item.price,
         quantity: item.quantity,
+        text: item.text,
         total: item.price * item.quantity,
       }));
       setOrder(allOrderList);
