@@ -21,8 +21,18 @@ const OrderDetail = ({
         <h6>x</h6>
         <h6>{quantity}</h6>
         <h6>${total}</h6>
-        <Button onClick={() => onDelete(id)}>修改</Button>
-        <Button onClick={() => onDelete(id)}>刪除</Button>
+        <i
+          style={{}}
+          onClick={() => onDelete(id)}
+          className="fa fa-edit fa-1x"
+          aria-hidden="true"
+        />
+        <i
+          style={{}}
+          onClick={() => onDelete(id)}
+          className="fa fa-trash fa-1x"
+          aria-hidden="true"
+        />
       </Container>
     </Wrap>
   </Main>
@@ -40,7 +50,7 @@ const Wrap = styled.div`
   width: 100%;
   border-bottom: 1px solid #d7d4d0;
   display: flex;
-`
+`;
 
 const Button = styled.button`
   cursor: pointer;
@@ -73,5 +83,13 @@ const Container = styled.div`
     margin: 0 0 0 20px;
     font-weight: 400;
     font-size: 18px;
+  }
+  i {
+    color: #a37264;
+    cursor: pointer;
+    margin-left: 20px;
+    &:hover {
+      color: #3b8ec2;
+    }
   }
 `;
