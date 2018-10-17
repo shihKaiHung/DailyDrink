@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import React from 'react';
 import { OrderItem, OrderItemTitle } from './commonStyle';
 
-export const OrderInput = ({ title, type, onChange }) => (
+export const OrderInput = ({ title, type, onChange, value }) => (
   <OrderItem>
     <OrderItemTitle>{title}</OrderItemTitle>
-    <OrderItemInput type={type} onChange={e => onChange(e.target.value)} />
+    <OrderItemInput type={type} value={value} onChange={e => onChange(e.target.value)} />
   </OrderItem>
 );
 

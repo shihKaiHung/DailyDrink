@@ -8,16 +8,20 @@ import OrderDetail from '../OrderDetail';
 const MainComponent = ({
   setName,
   setEditOpen,
-  onEdit,
-  editOpen,
   setIce,
   setSugar,
   setPrice,
   setQuantity,
   setText,
+  price,
+  name,
+  quantity,
   onSubmit,
   order,
   onDelete,
+  onEditSubmit,
+  onEdit,
+  editOpen,
   ModalComponent,
 }) => {
   let totalAmount = 0;
@@ -29,12 +33,27 @@ const MainComponent = ({
   return (
     <Main>
       {ModalComponent}
-      <OrderBox>
+      <OrderBox style={{ display: editOpen ? 'none' : 'block' }}>
         <OrderContainer>
           <Title>新增訂單</Title>
-          <OrderInput title="品項" type="text" onChange={setName} />
-          <OrderInput title="價錢" type="number" onChange={setPrice} />
-          <OrderInput title="數量" type="number" onChange={setQuantity} />
+          <OrderInput
+            title="品項"
+            type="text"
+            value={name}
+            onChange={setName}
+          />
+          <OrderInput
+            title="價錢"
+            type="number"
+            value={price}
+            onChange={setPrice}
+          />
+          <OrderInput
+            title="數量"
+            type="number"
+            value={quantity}
+            onChange={setQuantity}
+          />
           <OrderSelect title="冰塊" onChange={setIce} option={option.ice} />
           <OrderSelect title="甜度" onChange={setSugar} option={option.sugar} />
           <OrderItem>
@@ -76,9 +95,24 @@ const MainComponent = ({
         <EditBox style={{ display: editOpen ? 'block' : 'none' }}>
           <OrderContainer>
             <Title>修改訂單</Title>
-            <OrderInput title="品項" type="text" onChange={setName} />
-            <OrderInput title="價錢" type="number" onChange={setPrice} />
-            <OrderInput title="數量" type="number" onChange={setQuantity} />
+            <OrderInput
+              title="品項"
+              type="text"
+              value={name}
+              onChange={setName}
+            />
+            <OrderInput
+              title="價錢"
+              type="number"
+              value={price}
+              onChange={setPrice}
+            />
+            <OrderInput
+              title="數量"
+              type="number"
+              value={quantity}
+              onChange={setQuantity}
+            />
             <OrderSelect title="冰塊" onChange={setIce} option={option.ice} />
             <OrderSelect
               title="甜度"
@@ -96,7 +130,7 @@ const MainComponent = ({
               />
             </OrderItem>
             <OrderItem>
-              <EditButton onClick={onSubmit}>修改</EditButton>
+              <EditButton onClick={onEditSubmit}>修改</EditButton>
               <EditButton onClick={() => setEditOpen(false)}>取消</EditButton>
             </OrderItem>
           </OrderContainer>
@@ -137,6 +171,7 @@ const Title = styled.h3`
 
 const OrderBox = styled.div`
   margin: 0 20px;
+  transition: 0.2s;
   position: relative;
   width: 400px;
   height: 450px;

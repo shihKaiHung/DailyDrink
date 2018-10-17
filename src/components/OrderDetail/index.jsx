@@ -27,7 +27,7 @@ const OrderDetail = ({
           <h6>${total}</h6>
           <i
             style={{}}
-            onClick={() => setEditOpen(true)}
+            onClick={() => onEdit(id)}
             className="fa fa-edit fa-1x"
             aria-hidden="true"
           />
