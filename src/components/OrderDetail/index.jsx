@@ -4,7 +4,9 @@ import styled from 'styled-components';
 const OrderDetail = ({
   price,
   name,
+  setEditOpen,
   sugar,
+  onEdit,
   ice,
   quantity,
   text,
@@ -25,7 +27,7 @@ const OrderDetail = ({
           <h6>${total}</h6>
           <i
             style={{}}
-            onClick={() => onDelete(id)}
+            onClick={() => setEditOpen(true)}
             className="fa fa-edit fa-1x"
             aria-hidden="true"
           />

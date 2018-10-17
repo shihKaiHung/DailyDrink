@@ -4,6 +4,7 @@ import MainComponent from './components/Main';
 
 const App = compose(
   withModal(),
+  withState('editOpen', 'setEditOpen', false),
   withState('order', 'setOrder', []),
   withState('name', 'setName', ''),
   withState('ice', 'setIce', '正常'),
@@ -13,6 +14,7 @@ const App = compose(
   withState('quantity', 'setQuantity', 0),
   withHandlers({
     onSubmit: ({
+      editOpen,
       name,
       ice,
       sugar,
@@ -57,6 +59,9 @@ const App = compose(
       }
       const orderList = order.filter(item => item.id !== id);
       setOrder(orderList);
+    },
+    onEdit: ({ setEditOpen, editOpen }) => id => {
+      setEditOpen(!editOpen);
     },
   })
 )(MainComponent);
