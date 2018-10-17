@@ -5,6 +5,7 @@ const Main = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
+  z-index: 100;
   transform: translateX(-50%) translateY(-50%);
   width: 200px;
   height: 130px;

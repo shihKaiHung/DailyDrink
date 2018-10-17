@@ -108,6 +108,7 @@ const App = compose(
         price,
         quantity,
         text,
+        id: currentEdit,
         total: price * quantity,
       };
       orderList[currentEdit] = editOrder;
